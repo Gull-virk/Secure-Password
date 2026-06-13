@@ -1,0 +1,143 @@
+<!-- index.html -->
+<!-- PasswordAnalyzerPro - Frontend Dashboard -->
+<!-- Professional Cybersecurity SaaS UI (Defensive Use Only) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasswordAnalyzerPro</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        header {
+            background: #111827;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            padding: 12px;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        button {
+            background: #22c55e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #0b1220;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    🔐 PasswordAnalyzerPro Dashboard
+</header>
+
+<div class="container">
+
+    <!-- PASSWORD ANALYZER -->
+    <div class="card">
+        <h3>Password Analyzer</h3>
+        <input type="text" id="passwordInput" placeholder="Enter password">
+        <button onclick="analyzePassword()">Analyze</button>
+        <div class="result" id="analysisResult"></div>
+    </div>
+
+    <!-- PASSWORD GENERATOR -->
+    <div class="card">
+        <h3>Password Generator</h3>
+        <button onclick="generatePassword()">Generate Strong Password</button>
+        <div class="result" id="generatorResult"></div>
+    </div>
+
+</div>
+
+<script>
+const API = "http://127.0.0.1:8000";
+
+/* -----------------------------
+   ANALYZE PASSWORD
+----------------------------- */
+async function analyzePassword() {
+    const password = document.getElementById("passwordInput").value;
+
+    const res = await fetch(`${API}/analyze`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ password })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("analysisResult").innerHTML =
+        `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+}
+
+/* -----------------------------
+   GENERATE PASSWORD
+----------------------------- */
+async function generatePassword() {
+    const res = await fetch(`${API}/generate`);
+    const data = await res.json();
+
+    document.getElementById("generatorResult").innerHTML =
+        `<strong>${data.generated_password}</strong>`;
+}
+</script>
+
+</body>
+</html>

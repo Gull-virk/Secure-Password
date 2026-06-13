@@ -1,0 +1,28 @@
+/* style.css */
+/* PasswordAnalyzerPro - Professional Cybersecurity SaaS UI */
+/* Modern Dark Theme Dashboard (Defensive Use Only) */
+
+/* ------------------------------
+   GLOBAL STYLES
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #0b1220;
+    color: #e5e7eb;
+    line-height: 1.6;
+}
+
+/* ------------------------------
+   HEADER
+------------------------------ */
+header {
+    background: linear-gradient(90deg, #111827, #0f172a);
+    padding: 18px;
+    text-align: center;
+    font

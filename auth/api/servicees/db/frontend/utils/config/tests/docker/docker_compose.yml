@@ -1,0 +1,73 @@
+# docker-compose.yml
+# PasswordAnalyzerPro - Full Stack SaaS Deployment
+# Professional Cybersecurity SaaS Infrastructure (Defensive Use Only)
+
+version: "3.9"
+
+services:
+
+  # -----------------------------
+  # Backend API (FastAPI)
+  # -----------------------------
+  backend:
+    build: .
+    container_name: password_analyzer_backend
+    restart: always
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      - SECRET_KEY=CHANGE_THIS_SECRET_KEY
+      - DATABASE_URL=sqlite:///password_analyzer.db
+
+    volumes:
+      - .:/app
+
+    command: >
+      uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+
+  # -----------------------------
+  # Optional Database (PostgreSQL - Production Ready)
+  # -----------------------------
+  db:
+    image: postgres:15
+    container_name: password_analyzer_db
+    restart: always
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: password_analyzer
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+
+  # -----------------------------
+  # Adminer (Database GUI Tool)
+  # -----------------------------
+  adminer:
+    image: adminer
+    container_name: password_analyzer_adminer
+    restart: always
+
+    ports:
+      - "8080:8080"
+
+
+# -----------------------------
+# Persistent Storage
+# -----------------------------
+volumes:
+  db_data:

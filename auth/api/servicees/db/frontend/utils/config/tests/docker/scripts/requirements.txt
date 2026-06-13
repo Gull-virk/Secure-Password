@@ -1,0 +1,59 @@
+# PasswordAnalyzerPro - Python Dependencies
+# Professional Cybersecurity SaaS Requirements (Defensive Use Only)
+
+# -----------------------------
+# Web Framework
+# -----------------------------
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
+
+# -----------------------------
+# Security & Auth
+# -----------------------------
+python-jose==3.3.0
+passlib[bcrypt]==1.7.4
+
+# -----------------------------
+# Data Validation
+# -----------------------------
+pydantic==2.6.1
+
+# -----------------------------
+# Database
+# -----------------------------
+sqlalchemy==2.0.27
+
+# PostgreSQL driver (optional production DB)
+psycopg2-binary==2.9.9
+
+# -----------------------------
+# Environment Management
+# -----------------------------
+python-dotenv==1.0.1
+
+# -----------------------------
+# Testing
+# -----------------------------
+pytest==8.0.2
+pytest-asyncio==0.23.5
+
+# -----------------------------
+# Logging
+# -----------------------------
+loguru==0.7.2
+
+# -----------------------------
+# Security Utilities
+# -----------------------------
+bcrypt==4.1.2
+
+# -----------------------------
+# HTTP Requests (for breach checking APIs)
+# -----------------------------
+requests==2.31.0
+httpx==0.26.0
+
+# -----------------------------
+# Production Server Enhancements
+# -----------------------------
+gunicorn==21.2.0
